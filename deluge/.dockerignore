@@ -1,0 +1,15 @@
+# Ignore Docker-related files
+Dockerfile
+compose.yaml
+.dockerignore
+
+# Ignore .git and related files
+.git
+.gitignore
+
+# Ignore environment files
+.env
+
+# Ignore miscellaneous files
+*.log
+

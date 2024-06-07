@@ -1,0 +1,15 @@
+services:
+  portainer:
+    image: portainer/portainer-ce:latest
+    hostname: portainer
+    command: -H unix:///var/run/docker.sock
+    ports:
+      - 8000:8000
+      - 9443:9443
+    volumes:
+      - portainer-data:/data
+      - /var/run/docker.sock:/var/run/docker.sock
+    restart: unless-stopped
+
+volumes:
+  portainer-data:

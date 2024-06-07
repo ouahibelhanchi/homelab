@@ -1,0 +1,36 @@
+services:
+  mariadb:
+    image: lscr.io/linuxserver/mariadb:latest
+    hostname: mariadb
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+      - MYSQL_ROOT_PASSWORD=${MYSQL_PASSWORD}
+    volumes:
+      - mariadb-config:/config
+    expose:
+      - 3306:3306
+    restart: unless-stopped
+
+  nextcloud:
+    image: lscr.io/linuxserver/nextcloud:latest
+    hostname: nextcloud
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Africa/Casablanca
+    volumes:
+      - nextcloud-config:/config
+      - nextcloud-data:/data
+    ports:
+      - 443:443
+    restart: unless-stopped
+    depends_on:
+      - mariadb
+
+volumes:
+  mariadb-config:
+  nextcloud-config:
+  nextcloud-data:
+
